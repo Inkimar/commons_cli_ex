@@ -1,26 +1,43 @@
 package se.zanzibar.example.testingcli;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import se.zanzibar.example.testingcli.util.FileHelper;
 
 /**
  * Testing the Apache Commons cli project
  * http://commons.apache.org/proper/commons-cli/
  *
- * > mvn clean package > java -jar access2csv.jar -t
+ *
+ * > mvn clean package
  *
  * @author ingimar
  */
 public class Startup {
 
-    private final String nameOfApp = "access2csv";
+    private final String APPLICATION_NAME = "access2csv";
 
-    private final String suffixOfApp = ".jar";
+    private final String APPLICATION_SUFFIX = ".jar";
 
     private final String FILE = "file";
 
@@ -45,6 +62,11 @@ public class Startup {
     private final String SCHEMA = "schema";
 
     /**
+     * -file
+     * "jdbc:ucanaccess:///home/ingimar/ucanaccess/UCanAccess-3.0.3-bin/OcurrenceLit.mdb"
+     * -dir "/home/ingimar/Downloads/Testing-new/" 
+     * -f "/home/ingimar/ucanaccess/UCanAccess-3.0.3-bin/OcurrenceLit.mdb" -d
+     * "/home/ingimar/Downloads/Testing-new/"
      *
      * @param args
      */
@@ -54,51 +76,30 @@ public class Startup {
 
         CommandLine line = start.getCommand(args);
         start.parsing(line);
-
     }
 
     private void parsing(CommandLine line) {
+        String pathToDatabaseFile = "empty";
         if (line.hasOption(this.FILE)) {
-            String value = line.getOptionValue(this.FILE);
-            System.out.print("\n--file " + value);
-            checkFile(value);
+            pathToDatabaseFile = line.getOptionValue(this.FILE);
+            System.out.print("\n--file " + pathToDatabaseFile);
+            checkFile(pathToDatabaseFile);
         }
-        
+        String pathToDirectory = "empty";
         if (line.hasOption(this.PATH_TO_DIRECTORY)) {
-            String value = line.getOptionValue(this.PATH_TO_DIRECTORY);
-            System.out.print("\n--dir " + value);
-            checkDirectory(value);
+            pathToDirectory = line.getOptionValue(this.PATH_TO_DIRECTORY);
+            System.out.print("\n--dir " + pathToDirectory);
+            checkDirectory(pathToDirectory);
         }
-    }
 
-    private boolean checkFile(String value) {
-        boolean isReadable = false;
-        File file = new File(value);
-        if (file.exists() && file.canRead()) {
-            System.out.print(" :Able to READ the file");
-            isReadable = true;
-        } else {
-            System.out.print(" :Either the file does not exist or it is not readable");
-        }
-        return isReadable;
-    }
-
-    private boolean checkDirectory(String value) {
-        boolean isWriteable = false;
-        File file = new File(value);
-        if (file.isDirectory() && file.canWrite()) {
-            System.out.println(" :Able to write to the directory");
-            isWriteable = true;
-        } else {
-            System.out.println(" :Cannot write to the directory " + value);
-        }
-        return isWriteable;
+        String url = "jdbc:ucanaccess://".concat(pathToDatabaseFile);
+        this.accessDatabase(url, pathToDirectory);
     }
 
     private CommandLine getCommand(String[] arguments) {
-        String header = "This is ".concat(nameOfApp).concat(", a command to convert MS access data to .csv. \n\n")
+        String header = "This is ".concat(APPLICATION_NAME).concat(", a command to convert MS access data to .csv. \n\n")
                 .concat("Mimimal use example:\n")
-                .concat("java -jar ").concat(nameOfApp + suffixOfApp).concat(" my.accessdb\n\n")
+                .concat("java -jar ").concat(APPLICATION_NAME + APPLICATION_SUFFIX).concat(" my.accessdb\n\n")
                 .concat("This will dump all tables in the my.accessdb in the current directory,\n")
                 .concat("generating one .csv file per table.\n\n")
                 .concat("Available options:");
@@ -133,7 +134,7 @@ public class Startup {
                     "outputs the DDL including indexes, relations etc in sqlite DDL sql dialect");
 
             HelpFormatter formatter = new HelpFormatter();
-            formatter.printHelp(nameOfApp + suffixOfApp, header, options, footer, true);
+            formatter.printHelp(APPLICATION_NAME + APPLICATION_SUFFIX, header, options, footer, true);
 
             CommandLineParser parser = new DefaultParser();
             cmd = parser.parse(options, arguments);
@@ -142,5 +143,98 @@ public class Startup {
         }
 
         return cmd;
+    }
+
+    private void accessDatabase(String url, String path) {
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            Connection conn = DriverManager.getConnection(url);
+            DatabaseMetaData md = conn.getMetaData();
+            ResultSet rs = md.getTables(null, null, "%", null);
+            List<String> tables = new ArrayList<>();
+
+            Statement stmt = conn.createStatement();
+            ResultSet rsColumns = null;
+            DatabaseMetaData meta = conn.getMetaData();
+            Map<String, Integer> abc = new HashMap<>();
+            while (rs.next()) {
+                String table = rs.getString(3);
+                rsColumns = meta.getColumns(null, null, table, null);
+                int count = 0;
+                while (rsColumns.next()) {
+                    count++;
+                }
+                tables.add(table);
+                abc.put(table, count);
+//                System.out.println("Number of Columns " + count);
+            }
+
+            for (Map.Entry<String, Integer> entrySet : abc.entrySet()) {
+                String table = entrySet.getKey();
+                Integer value = entrySet.getValue();
+                String absolutePath = createFile(path + table);
+                handlingTable(stmt, table, value, absolutePath);
+
+            }
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.err.println("exception" + ex.getMessage());
+        }
+    }
+
+    private static void handlingTable(Statement stmt, String table, int nrOfColumns, String absolutePath) {
+        try {
+            ResultSet rask = stmt.executeQuery("SELECT * FROM " + table);
+            int post = 0;
+            while (rask.next()) {
+                post++;
+                String row = "";
+                for (int i = 1; i < nrOfColumns + 1; i++) {
+                    String wash = simpleWash(rask.getString(i));
+                    row = row + wash + ",";
+
+                }
+                row = row.substring(0, row.length() - 1);
+                row = row + "\n";
+
+                write(absolutePath, row);
+            }
+        } catch (SQLException ex) {
+            System.err.println("SQLException" + ex.getMessage());
+        }
+    }
+
+    private static String simpleWash(String row) {
+        final String CONSTANT = "\n";
+        char CHAR_CONSTANT = CONSTANT.charAt(0);
+        
+        if (row == null) {
+            return row;
+        } else if (row.contains(CONSTANT)) {
+            String replace = row;
+            replace = row.replace(CHAR_CONSTANT, '$');
+            return replace;
+        }
+
+        return row;
+    }
+
+    private static void write(String absPath, String content) {
+        try {
+            Files.write(Paths.get(absPath), content.getBytes(), StandardOpenOption.APPEND);
+        } catch (IOException ex) {
+        }
+    }
+
+    private boolean checkFile(String absolutePath) {
+        return FileHelper.checkFile(absolutePath);
+    }
+
+    private boolean checkDirectory(String value) {
+        return FileHelper.checkDirectory(value);
+    }
+
+    private static String createFile(String absoluteFilename) {
+        return FileHelper.createOutputFile(absoluteFilename);
     }
 }
