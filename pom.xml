@@ -20,7 +20,7 @@
     </dependencies>
     <build>
         <!--<finalName>${project.name}-testing</finalName>-->
-        <finalName>Testing</finalName>
+        <finalName>access2csv</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
