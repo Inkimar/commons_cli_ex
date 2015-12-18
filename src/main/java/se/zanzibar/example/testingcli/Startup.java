@@ -62,7 +62,8 @@ public class Startup {
             String value = line.getOptionValue(this.FILE);
             System.out.print("\n--file " + value);
             checkFile(value);
-        } 
+        }
+        
         if (line.hasOption(this.PATH_TO_DIRECTORY)) {
             String value = line.getOptionValue(this.PATH_TO_DIRECTORY);
             System.out.print("\n--dir " + value);
