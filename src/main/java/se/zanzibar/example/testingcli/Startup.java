@@ -1,6 +1,7 @@
 package se.zanzibar.example.testingcli;
 
 import java.util.Date;
+import java.util.List;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -21,6 +22,18 @@ public class Startup {
     private final String nameOfApp = "access2csv";
 
     private final String suffixOfApp = ".jar";
+    
+    private final String FILE ="file";
+    private final String TABLE ="table";
+    private final String COLUMN_DELIMITER ="column_delimiter";
+    private final String ROW_DELIMITER ="row_delimiter";
+    private final String QUOTE_CHARACTER ="quote-character";
+    private final String QUOTE_ESCAPE ="quote-escape";
+    private final String NO_QUOTING ="no-quoting";
+    private final String STRIP ="strip";
+    private final String LIST_ALL_TABLES ="list-all-tables";
+    private final String SCHEMA ="schema";
+    private final String PATH_TO_DIRECTORY ="directory";
 
     /**
      *
@@ -31,10 +44,19 @@ public class Startup {
         Startup start = new Startup();
 
         CommandLine line = start.getCommand(args);
-        if (line.hasOption("t")) {
-            System.out.println("Date is " + new Date());
-        }
+        start.parsing(line);
+//        if (line.hasOption("file")) {
+//            String optionValue = line.getOptionValue("file");
+//            System.out.println("optionValue --file "+optionValue);
+//        }
 
+    }
+    
+    private void parsing(CommandLine line){
+        if (line.hasOption(this.FILE)) {
+            String optionValue = line.getOptionValue(this.FILE);
+            System.out.println("optionValue for --file "+optionValue);
+        }
     }
 
     private CommandLine getCommand(String[] arguments) {
@@ -51,25 +73,27 @@ public class Startup {
         try {
             Options options = new Options();
            
-            options.addOption("f","file", false, 
-                    "the .mdb or .accdb database file");
+            options.addOption("f",this.FILE, true, 
+                    "the .mdb or .accdb database file"); // has key value
+            options.addOption("d",this.PATH_TO_DIRECTORY, true, 
+                    "the path to the directory where the .csv-file(s) will be stored"); // has key value
             options.addOption("t","table", false, 
                     "if provided only the specified table will be dumped, the default is to dump all tables except the system tables");
-            options.addOption("cd","column_delimiter", false, 
+            options.addOption("cd",this.COLUMN_DELIMITER, false, 
                     "default is ,");
-            options.addOption("rd","row_delimiter", false, 
+            options.addOption("rd",this.ROW_DELIMITER, false, 
                     "default is \\n");
-            options.addOption("qc","quote-character", false, 
+            options.addOption("qc",this.QUOTE_CHARACTER, false, 
                     "default is \" ");
-            options.addOption("qe","quote-escape", false, 
+            options.addOption("qe",this.QUOTE_ESCAPE, false, 
                     "default is \\ - used for escaping quote characters that appears within a field");
-            options.addOption("nq","no-quoting", false, 
+            options.addOption("nq",this.NO_QUOTING, false, 
                     "activates a mode where text values are not quoted, which all text values are by default");
-            options.addOption("st","strip", false, 
+            options.addOption("st",this.STRIP, false, 
                     "actives a mode where wierd characters are stripped from the output (in Access these can appear for example in MEMO fields)");
-            options.addOption("list","list-all-tables", false, 
+            options.addOption("list",this.LIST_ALL_TABLES, false, 
                     "does not dump data into .csv, instead outputs a tab delimited list of all table names, excluding system tables (ie excludes any tables beginning with \"MSys\")");
-            options.addOption("s","schema", false, 
+            options.addOption("s",this.SCHEMA, false, 
                     "outputs the DDL including indexes, relations etc in sqlite DDL sql dialect");
 
             HelpFormatter formatter = new HelpFormatter();
