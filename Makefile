@@ -1,4 +1,5 @@
 SCHEMA = OcurrenceLit.mdb
+PROGRAM = access2csv.jar
 
 all: clean-src install run
 
@@ -26,3 +27,9 @@ run:
 dl-jars: 
 	@echo "Fetching the zip-file w. 2 jar-files needed for this project [not in maven-repo at this point in time]"
 	cd dependencies &&  wget https://archive.org/download/OcurrenceLit/UCanAccess-3.0.6-bin.zip
+
+alt:
+	@echo " work-in-progress : Just nu så har jar-filen access2csv.jar inte sina dependencies , de finns i katalogen xx"
+	#mkdir target	
+	#cd target && wget https://archive.org/download/access2csv/${PROGRAM}
+	#java -jar target/access2csv.jar -f "resources/${SCHEMA}" -d "output/"
