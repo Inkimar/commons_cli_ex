@@ -1,7 +1,7 @@
 https://sourceforge.net/projects/ucanaccess/
 https://mvnrepository.com/artifact/net.sf.ucanaccess/ucanaccess/3.0.3
 
-Install ucanaccess.jar in your local repostity
+Install *.jar in your local repository
 mvn install:install-file -Dfile=ucanaccess-3.0.6.jar -DgroupId=net.ucanacess -DartifactId=ucanaccess -Dversion=3.0.6 -Dpackaging=jar
-if running in netbeans :
-- right click on ucanload-3.0.6.jar 'manually install artifact'
+renamed ucanload.jar to ucanload-3.0.6.jar
+mvn install:install-file -Dfile=ucanload-3.0.6.jar -DgroupId=net.ucanacess -DartifactId=ucanload -Dversion=3.0.6 -Dpackaging=jar
