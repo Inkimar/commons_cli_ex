@@ -1,5 +1,5 @@
 # To export  an Access database (mdb) to csv-files.
-one table to one <table>.csv-file <br>
+every table is export to one csv-file <br>
 csv-files are saved in the output-directory.
 
 
