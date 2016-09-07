@@ -1,12 +1,33 @@
-# URI:s
+# To export  an Access database (mdb) to csv-files.
+one table to one <table>.csv-file <br>
+csv-files are saved in the output-directory.
+
+
+# reference URI:s
 1. https://sourceforge.net/projects/ucanaccess/
 2. https://mvnrepository.com/artifact/net.sf.ucanaccess/ucanaccess/3.0.3
 
+# Internet Archive (IA)
+2 files.
 
-#Install *.jar in your local repository
-1. mvn install:install-file -Dfile=ucanaccess-3.0.6.jar -DgroupId=net.ucanacess -DartifactId=ucanaccess -Dversion=3.0.6 -Dpackaging=jar
-2. mv ucanload.jar ucanload-3.0.6.jar
-3. mvn install:install-file -Dfile=ucanload-3.0.6.jar -DgroupId=net.ucanacess -DartifactId=ucanload -Dversion=3.0.6 -Dpackaging=jar
+1. example database : OcurrenceLit.mdb
+2. dependencies : UCanAccess-3.0.6-bin.zip 
 
-java -jar access2csv.jar -f  "/home/ingimar/ucanaccess/UCanAccess-3.0.3-bin/OcurrenceLit.mdb"  -d "/home/ingimar/Downloads/Testing-new/"
+# Makefile
+Workaround for 2 dependencies, due to that those are not in mvn-central
+
+##  dependencies
+UCanAccess-3.0.6-bin.zip  has 2 important jar-files.
+
+1. ucanaccess-3.0.6.jar
+2. ucanload-3.0.6.jar
+
+## download and install dependencies
+You only have to do this one.
+
+**'make jars'** fetches jar-files and installs them in local repo (~/.m2/repository/)
+
+## run the example database schema
+**'make'**
+
 
