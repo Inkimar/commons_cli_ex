@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -27,9 +25,8 @@ import se.zanzibar.example.testingcli.util.FileHelper;
 /**
  * Testing the Apache Commons cli project
  * http://commons.apache.org/proper/commons-cli/
+ * https://sourceforge.net/projects/ucanaccess/
  *
- *
- * > mvn clean package
  *
  * @author ingimar
  */
@@ -62,11 +59,6 @@ public class Startup {
     private final String SCHEMA = "schema";
 
     /**
-     * -file
-     * "jdbc:ucanaccess:///home/ingimar/ucanaccess/UCanAccess-3.0.3-bin/OcurrenceLit.mdb"
-     * -dir "/home/ingimar/Downloads/Testing-new/" 
-     * -f "/home/ingimar/ucanaccess/UCanAccess-3.0.3-bin/OcurrenceLit.mdb" -d
-     * "/home/ingimar/Downloads/Testing-new/"
      *
      * @param args
      */
