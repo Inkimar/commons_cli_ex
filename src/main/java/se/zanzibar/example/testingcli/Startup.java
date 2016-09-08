@@ -65,7 +65,6 @@ public class Startup {
     public static void main(String[] args) {
 
         Startup start = new Startup();
-
         CommandLine line = start.getCommand(args);
         start.parsing(line);
     }
