@@ -7,6 +7,7 @@ all: dl-schema clean install run
 clean : clean-src clean-csv
 
 clean-src:
+	@echo "using mvn : deletes"
 	mvn clean
 
 clean-csv:
@@ -17,7 +18,7 @@ clean-logs:
 	test -e '*.log' || rm -v *.log
 
 install:
-	@echo "Compiles and creates the access2csv.jar-file "
+	@echo "using mvn : Compiles and creates the access2csv.jar-file "
 	mvn install
 	sleep 5
 
