@@ -9,12 +9,12 @@ Control of which artifacts are created is configured in the pom.xml with the 'sh
 
 Binaries created :
 
-1. access2csv.jar (dependencies in directory )
-2. access2csv-jar-with-dependencies.jar (standalone runnable file)
+1. thin : access2csv.jar (dependencies in directory )
+2. fat: access2csv-jar-with-dependencies.jar (standalone runnable file)
 
 **Tested with :**
 
-1. Java version: 1.8.0_91 
+1. Java version: 1.7.0_111 
 2. Apache Maven 3.0.5
 
 
