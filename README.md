@@ -4,6 +4,14 @@
 every table in the database is exported to one csv-file <br>
 csv-files are saved in the output-directory.
 
+# artifacts
+Control of which artifacts are created is configured in the pom.xml with the 'shade'-plugin. <br>
+
+Binaries created :
+
+1. access2csv.jar (dependencies in directory )
+2. access2csv-jar-with-dependencies.jar (standalone runnable file)
+
 **Tested with :**
 
 1. Java version: 1.8.0_91 
