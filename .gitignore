@@ -17,6 +17,8 @@ output/*
 target/*
 
 #files
+README.html
+README.md~
 Makefile~
 *.~
 .*~
