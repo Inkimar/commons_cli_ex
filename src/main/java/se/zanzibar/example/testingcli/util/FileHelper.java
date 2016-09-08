@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package se.zanzibar.example.testingcli.util;
 
 import java.io.File;
@@ -45,7 +40,7 @@ public class FileHelper {
         boolean isReadable = false;
         File file = new File(absolutePath);
         if (file.exists() && file.canRead()) {
-            System.out.print(" \n:Able to READ the file");
+            System.out.print(" \n:Able to READ the incoming file: "+file.getName() );
             isReadable = true;
         } else {
             System.out.print(" \n:Either the file does not exist or it is not readable");
@@ -58,7 +53,7 @@ public class FileHelper {
         boolean isWriteable = false;
         File file = new File(value);
         if (file.isDirectory() && file.canWrite()) {
-            System.out.println(" \n:Able to write to the directory");
+            System.out.println(" \n:Able to write to the directory: "+file.getName());
             isWriteable = true;
         } else {
             System.out.println(" \n:Cannot write to the directory " + value);
