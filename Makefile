@@ -1,6 +1,7 @@
-SCHEMA = OcurrenceLit.mdb
-PROGRAM = access2csv.jar
 TS := $(shell date '+%Y_%m_%d_%H_%M')
+SCHEMA = OcurrenceLit.mdb
+#PROGRAM = access2csv.jar
+PROGRAM = access2csv-jar-with-dependencies.jar
 
 all: dl-schema clean install run
 
@@ -18,14 +19,15 @@ clean-logs:
 	#test -e '*.log' || rm -v *.log
 
 install:
-	@echo "using mvn : Compiles and creates the access2csv.jar-file "
+	@echo "using mvn : Compiles and creates the ${PROGRAM}-file "
 	mvn install
 	sleep 5
 
 # override the schema by running 'make run SCHEMA=<your-name>.mdb , be sure that <your-name>.mdb is in the resources-directory '
 run:
-	@echo "Parsing the ${SCHEMA} database"
-	java -jar target/access2csv-jar-with-dependencies.jar -f "resources/${SCHEMA}" -d "output/"
+	@echo "Parsing the ${SCHEMA} database with ${PROGRAM}"
+	java -jar target/${PROGRAM} -f "resources/${SCHEMA}" -d "output/"
+
 	#touch ${TS}.log && echo "Database is ${SCHEMA}" > ${TS}.log && ls -l output >> ${TS}.log
 
 dl-schema:
@@ -36,5 +38,5 @@ help:
 	firefox  https://www.gnu.org/software/make/manual/ &
 
 testing:
-	@echo "Database is ${SCHEMA}"
+	@echo "Default Database is ${SCHEMA}"
 
