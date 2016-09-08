@@ -18,15 +18,16 @@ The example database is stored here ( OcurrenceLit.mdb )
 # Makefile
 run **'make'**
 
-1. downloads example-databas if it does not exist
+1. downloads the example-databas  from IA (only if the db does not exist)
 2. cleans out *.class-files and the *.csv-files
 3. builds the project and creates a executeable access2csv.jar
 4. runs the access2csv.jar-file, generates output in the 'output'-directory
 
+logs are created, <timestamp>.log
+
 ## Run your own mdb-file.
 
-1. put your mdb-file (Your.mdb) in the 'resources'-directory
-2. edit the Makefile, change the variable 'SCHEMA=OcurrenceLit.mdb' to 'SCHEMA=Your.mdb'.
-3. **'make'***
+1. Obs : Put your mdb-file (Your.mdb) in the 'resources'-directory
+2. **'make run SCHEMA=Your.mdb'**
 
 
