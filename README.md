@@ -4,6 +4,12 @@
 every table in the database is exported to one csv-file <br>
 csv-files are saved in the output-directory.
 
+**Tested with :**
+
+1. Java version: 1.8.0_91 
+2. Apache Maven 3.0.5
+
+
 
 # reference URI:s (dependency on this library)
 1. https://sourceforge.net/projects/ucanaccess/
