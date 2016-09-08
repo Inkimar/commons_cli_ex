@@ -16,10 +16,12 @@ The example database is stored here ( OcurrenceLit.mdb )
 
 
 # Makefile
-## Run the example, following 2 targets 
+run **'make'**
 
-2. **'make dl-schema'**
-3. **'make'**
+1. downloads example-databas if it does not exist
+2. cleans out *.class-files and the *.csv-files
+3. builds the project and creates a executeable access2csv.jar
+4. runs the access2csv.jar-file, generates output in the 'output'-directory
 
 ## Run your own mdb-file.
 

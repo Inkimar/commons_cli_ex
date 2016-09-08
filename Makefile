@@ -1,7 +1,7 @@
 SCHEMA = OcurrenceLit.mdb
 PROGRAM = access2csv.jar
 
-all: clean-src install run
+all: dl-schema clean install run
 
 clean : clean-src clean-csv
 
@@ -19,9 +19,10 @@ install:
 run:
 	@echo "Testing the project, running an example mdb-file"
 	java -jar target/access2csv.jar -f "resources/${SCHEMA}" -d "output/"
+	ls -l output
 
 dl-schema:
-	@echo "Fetching the example mdb-file"
-	cd resources && wget https://archive.org/download/OcurrenceLit/${SCHEMA}
+	@echo "Fetching the example mdb-file if it does not exist"
+	cd resources && test -e ${SCHEMA} || wget https://archive.org/download/OcurrenceLit/${SCHEMA}
 
 
