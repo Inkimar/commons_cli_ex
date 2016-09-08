@@ -20,5 +20,6 @@ target/*
 README.html
 README.md~
 Makefile~
+.Rhistory
 *.~
 .*~
