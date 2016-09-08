@@ -23,16 +23,6 @@
             <artifactId>ucanaccess</artifactId>
             <version>3.0.6</version>
         </dependency>
-<!--        <dependency>
-            <groupId>net.ucanacess</groupId>
-            <artifactId>ucanaccess</artifactId>
-            <version>3.0.6</version>
-        </dependency>
-        <dependency>
-            <groupId>net.ucanacess</groupId>
-            <artifactId>ucanload</artifactId>
-            <version>3.0.6</version>
-        </dependency>-->
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
