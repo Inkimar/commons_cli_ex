@@ -25,6 +25,7 @@ The example database is stored here ( OcurrenceLit.mdb )
 4. runs the access2csv.jar-file, generates output in the 'output'-directory
 
 ### run **'make run SCHEMA=Your.mdb'** <br>
+where 'Your.mdb' is your schema, this will override the settings 'SCHEMA = OcurrenceLit.mdb' in the Makefile
 
 prerequistite :
 
