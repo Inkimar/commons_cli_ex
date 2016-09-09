@@ -11,3 +11,5 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+    repo: Inkimar/commons_cli_ex
+    all_branches: true
