@@ -1,5 +1,16 @@
 https://www.mkyong.com/maven/create-a-fat-jar-file-maven-assembly-plugin/
 
+creating releases , github/travis
+https://help.github.com/articles/creating-releases/
+
+releases via git tag
+git tag <tagname>
+git push origin --tags
+- blir en zip-fil och en tar.gz men de innehåller inte jar-filen
+
+http://stackoverflow.com/questions/28174883/travis-ci-deploy-jar-to-github-master
+
+
 
 https://sourceforge.net/projects/ucanaccess/
 
