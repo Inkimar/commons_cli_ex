@@ -2,6 +2,8 @@ language: java
 jdk:
 - oraclejdk7
 
+script: mvn clean package
+
 # https://docs.travis-ci.com/user/deployment/releases
 deploy:
   provider: releases
