@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.org/Inkimar/commons_cli_ex.svg?branch=master)](https://api.travis-ci.org/Inkimar/commons_cli_ex)
+[![Build Status](https://api.travis-ci.org/Inkimar/commons_cli_ex.svg?branch=master)](https://travis-ci.org/Inkimar/commons_cli_ex)
 
 # What : To export  an Access database (mdb) to csv-files.
 every table in the database is exported to one csv-file <br>
