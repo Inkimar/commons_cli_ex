@@ -24,8 +24,8 @@ Binaries created :
 2. https://mvnrepository.com/artifact/net.sf.ucanaccess/ucanaccess/3.0.3
 3. CLI-programming : https://commons.apache.org/proper/commons-cli/ 
 
-# Internet Archive (IA)
-The example database is stored here ( OcurrenceLit.mdb )
+# Internet Archive (IA) https://archive.org/ 
+The example database is stored here (OcurrenceLit.mdb)
 
 1. **'make dl-schema'** : fetches the database from IA
 
@@ -48,4 +48,8 @@ prerequistite :
 
 
 logs are created, <timestamp>.log
+
+# additional docker-project
+see -> https://github.com/bioatlas/access2csv-docker
+
 
