@@ -5,10 +5,10 @@ PROGRAM = access2csv-jar-with-dependencies.jar
 
 all: dl-schema clean install run
 
-clean : clean-src
+clean : clean-target
 
-clean-src:
-	@echo "using mvn : deletes"
+clean-target:
+	@echo "using mvn : deletes the target directory"
 	mvn clean
 
 clean-csv:
