@@ -4,7 +4,34 @@
     <groupId>se.nrm.mediaserver</groupId>
     <artifactId>testingCLI</artifactId>
     <version>1.0-SNAPSHOT</version>
+    
     <packaging>jar</packaging>
+
+    <developers>
+        <developer>
+            <id>inkimar</id>
+            <name>Ingimar Erlingsson</name>
+            <email>inkimar@gmail.com</email>
+            <organization>Swedish Natural History Museum</organization>
+            <organizationUrl>http://www.nrm.se</organizationUrl>
+            <roles>
+              <role>developer</role>
+            </roles>
+            <timezone>Europe/Stockholm</timezone>
+        </developer> 
+    </developers>
+    <contributors>
+         <contributor>
+          <name>skyttner</name>
+          <organization>Swedish Natural History Museum<</organization>
+          <organizationUrl>http://www.nrm.se</organizationUrl>
+          <roles>
+            <role>architect</role>
+          </roles>
+           <timezone>Europe/Stockholm</timezone>
+         </contributor>
+    </contributors>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
