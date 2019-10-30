@@ -51,6 +51,9 @@ logs are created, <timestamp>.log
 see -> https://github.com/bioatlas/access2csv-docker
 
 
+# notes on travis.
+https://docs.travis-ci.com/user/languages/java/
+
 
 # reference URI:s (dependency on this library)
 
