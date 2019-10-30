@@ -18,6 +18,10 @@ clean-csv:
 clean-logs:
 	#test -e '*.log' || rm -v *.log
 
+dl-schema:
+	@echo "Fetching the example mdb-file if it does not exist"
+	cd resources && test -e ${SCHEMA} || wget https://archive.org/download/OcurrenceLit/${SCHEMA}
+
 install:
 	@echo "using mvn : Compiles and creates the ${PROGRAM}-file "
 	mvn install
@@ -30,13 +34,6 @@ run:
 
 	#touch ${TS}.log && echo "Database is ${SCHEMA}" > ${TS}.log && ls -l output >> ${TS}.log
 
-dl-schema:
-	@echo "Fetching the example mdb-file if it does not exist"
-	cd resources && test -e ${SCHEMA} || wget https://archive.org/download/OcurrenceLit/${SCHEMA}
-
-help: 
-	firefox  https://www.gnu.org/software/make/manual/ &
-
-testing:
+which-database:
 	@echo "Default Database is ${SCHEMA}"
 
