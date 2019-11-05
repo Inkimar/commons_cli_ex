@@ -23,7 +23,7 @@ https://archive.org/download/access2csv
 
 # Example database  OcurrenceLit.mdb
 
-The example database 'OcurrenceLit.mdb' is stored [here]:https://archive.org/download/OcurrenceLit/OcurrenceLit.mdb
+The example database 'OcurrenceLit.mdb' is stored [here](https://archive.org/download/OcurrenceLit/OcurrenceLit.mdb)
 
 1. **'make dl-schema'** : fetches the database from IA
 
