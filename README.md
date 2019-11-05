@@ -21,7 +21,7 @@ https://archive.org/download/access2csv
 2. Apache Maven 3.0.5
 
 
-# Example database  OcurrenceLit.mdb
+# Example database : 'OcurrenceLit.mdb'
 
 The example database 'OcurrenceLit.mdb' is stored [here](https://archive.org/download/OcurrenceLit/OcurrenceLit.mdb)
 
