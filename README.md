@@ -13,7 +13,7 @@ Control of which artifacts are created is configured in the pom.xml with the 'sh
 1. thin-jar : access2csv.jar (dependencies in directory )
 2. fat-jar  : access2csv-jar-with-dependencies.jar (standalone runnable file)
 
-You can also find fetch the jar ->  [access2csv.jar]( https://archive.org/download/access2csv)
+You can also find fetch the thin-jar ->  [access2csv.jar]( https://archive.org/download/access2csv)
 
 **Tested with :**
 
